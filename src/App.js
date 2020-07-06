@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Gallery from "./Gallery";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    images: [],
+  };
+
+  componentDidMount() {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((r) => r.json())
+      .then((images) => {
+        this.setState({ images: images.data.memes });
+      });
+  }
+  render() {
+    return (
+      <div>
+        <Gallery images={this.state.images.filter((i) => i.box_count === 2)} />
+      </div>
+    );
+  }
 }
-
-export default App;
