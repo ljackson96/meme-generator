@@ -6,7 +6,13 @@ export default class Gallery extends Component {
     return (
       <div>
         {this.props.images.map((image) => {
-          return <Image key={image.id} image={image} />;
+          return (
+            <Image
+              key={image.id}
+              image={image}
+              handleclick={this.props.handleclick}
+            />
+          );
         })}
       </div>
     );
