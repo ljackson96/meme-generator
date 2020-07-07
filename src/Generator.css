@@ -1,0 +1,32 @@
+.meme-form {
+    margin-left: 20px;
+    padding-left: 20px;
+    width: 300px;
+    border-left: 1px solid #e9ecef;
+}
+
+.meme-gen-modal {
+    max-width: fit-content;
+}
+
+.modal-body {
+  display: flex;
+  border-radius: 0px;
+  border: 1px none #000000;
+  background-color: rgba( 246, 245, 243, 1.00 );
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #666;
+}
+
+.btn-primary {
+    background: #666 !important;
+    border: none !important;
+    outline: none !important;
+    width: 100%;
+}
