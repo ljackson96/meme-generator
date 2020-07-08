@@ -1,33 +1,25 @@
 import React, { Component } from "react";
 import Gallery from "./Gallery";
-import Generator from "./Generator";
+// import Generator from "./Generator";
+import TempGen from "./TempGen";
 
 export default class App extends Component {
   state = {
     images: [],
     selected: null,
-    selectedImg: "",
+    selectedImg: [],
   };
 
-  componentDidMount() {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((r) => r.json())
-      .then((images) => {
-        this.setState({ images: images.data.memes });
-      });
-  }
-
   handleImgClick = (e) => {
-    console.log("clicked", e.target.id);
     this.setState({
-      selected: true,
-      selectedImg: this.state.images.find((i) => i === e.target),
+      selectedImg: this.state.images.find(i => i.id === e.target.id),
     });
+    this.toggleSelected()
   };
 
   toggleComponent = () => {
     if (this.state.selected) {
-      return <Generator />;
+      return <TempGen meme={this.state.selectedImg} toggleSelected={this.toggleSelected} />;
     } else {
       return (
         <Gallery
@@ -39,6 +31,20 @@ export default class App extends Component {
   };
 
   render() {
-    return <div>{this.toggleComponent()}</div>;
+    return <div>
+      {this.toggleComponent()}
+    </div>;
+  }
+
+  toggleSelected = () => {
+    this.setState({ selected: !this.state.selected })
+  }
+
+  componentDidMount() {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((r) => r.json())
+      .then((images) => {
+        this.setState({ images: images.data.memes });
+      });
   }
 }
