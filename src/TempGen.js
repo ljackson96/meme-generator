@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand } from 'reactstrap';
 import "./Generator.css"
 
 const initialState = {
@@ -7,8 +6,8 @@ const initialState = {
     bottomtext: "",
     isTopDragging: false,
     isBottomDragging: false,
-    topY: "10%",
     topX: "50%",
+    topY: "10%",
     bottomX: "50%",
     bottomY: "90%"
 }
@@ -19,8 +18,8 @@ class TempGen extends Component {
         super();
         this.state = {
             currentImage: "",
-            modalIsOpen: false,
-            currentImagebase64: null,
+            // modalIsOpen: false,
+            // currentImagebase64: null,
             ...initialState
         };
     }
@@ -84,10 +83,34 @@ class TempGen extends Component {
         });
     }
 
+    convertSvgToImage = () => {
+        const svg = this.svgRef;
+        let svgData = new XMLSerializer().serializeToString(svg);
+        const canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "canvas");
+        const svgSize = svg.getBoundingClientRect();
+        canvas.width = svgSize.width;
+        canvas.height = svgSize.height;
+        const img = document.createElement("img");
+        img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
+        img.onload = function () {
+            canvas.getContext("2d").drawImage(img, 0, 0);
+            const canvasdata = canvas.toDataURL("image/png");
+            console.log(svgData)
+            const a = document.createElement("a");
+            a.download = "meme.png";
+            a.href = canvasdata;
+            document.body.appendChild(a);
+            a.click();
+        };
+    }
+
     render() {
         const image = this.props.meme;
-        let newWidth = image.width;
-        let newHeight = image.height;
+        var wrh = image.width / image.height;
+        var newWidth = 500;
+        var newHeight = newWidth / wrh;
+
         const textStyle = {
             fontFamily: "Impact",
             fontSize: "50px",
@@ -96,7 +119,7 @@ class TempGen extends Component {
             stroke: "#000",
             userSelect: "none"
         }
-        
+
         return (
             <div className="main-content">
                 <div className="meme-gen-modal" >
@@ -140,6 +163,8 @@ class TempGen extends Component {
                         <input className="form-control" type="text" name="toptext" id="toptext" placeholder="Add text to the top" onChange={this.changeText} />
                         <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
                     </div>
+                    <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                    <button onClick={() => this.convertSvgToImage()} className="btn btn-primary">Download Meme :)</button>
                 </div>
             </div>
         );

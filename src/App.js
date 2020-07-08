@@ -11,7 +11,6 @@ export default class App extends Component {
   };
 
   handleImgClick = (e) => {
-    console.log("clicked", e.target);
     this.setState({
       selectedImg: this.state.images.find(i => i.id === e.target.id),
     });
@@ -20,7 +19,7 @@ export default class App extends Component {
 
   toggleComponent = () => {
     if (this.state.selected) {
-      return <TempGen meme={this.state.selectedImg} />;
+      return <TempGen meme={this.state.selectedImg} toggleSelected={this.toggleSelected} />;
     } else {
       return (
         <Gallery
@@ -32,7 +31,9 @@ export default class App extends Component {
   };
 
   render() {
-    return <div>{this.toggleComponent()}</div>;
+    return <div>
+      {this.toggleComponent()}
+    </div>;
   }
 
   toggleSelected = () => {
