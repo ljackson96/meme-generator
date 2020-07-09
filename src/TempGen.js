@@ -81,32 +81,7 @@ class TempGen extends Component {
             isBottomDragging: false,
         });
     };
-
-    convertSvgToImage = () => {
-        const svg = this.svgRef;
-        let svgData = new XMLSerializer().serializeToString(svg);
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "canvas");
-        const svgSize = svg.getBoundingClientRect();
-        canvas.width = svgSize.width;
-        canvas.height = svgSize.height;
-        const img = document.createElement("img");
-        img.setAttribute(
-            "src",
-            "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
-        );
-        img.onload = function () {
-            canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/png");
-            console.log(svgData);
-            const a = document.createElement("a");
-            a.download = "meme.png";
-            a.href = canvasdata;
-            document.body.appendChild(a);
-            a.click();
-        };
-    };
-
+   
     svgToPng = () => {
         svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png");
     };
@@ -141,6 +116,7 @@ class TempGen extends Component {
 
         return (
             <div className="main-content">
+              
                 <div className="meme-gen-modal">
                     <svg
                         id="svg_ref"
@@ -150,7 +126,8 @@ class TempGen extends Component {
                         height={newHeight}
                         width={newWidth}
                     >
-                        <image
+                        <image className="hola"
+                    
                             ref={(el) => {
                                 this.imageRef = el;
                             }}
@@ -201,9 +178,11 @@ class TempGen extends Component {
                             onChange={this.changeText}
                         />
                     </div>
-                    <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
-                    <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
-                    <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                    <div className="buttons">
+                        <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
+                        <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
+                        <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                    </div>
                 </div>
             </div>
         );
