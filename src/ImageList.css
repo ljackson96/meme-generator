@@ -16,6 +16,12 @@
     border-radius: 5%;
     padding: 4px;
     background-color: white;
+    padding:4px;
+    background-color:#fff;
+    border: 1px solid #b2b2b2;
+    -webkit-box-shadow: 3px 3px 4px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    3px 3px 4px rgba(50, 50, 50, 0.75);
+    box-shadow:         3px 3px 4px rgba(50, 50, 50, 0.75);
     
 }
 
@@ -33,7 +39,8 @@
 
 
 .h1 {
-    padding-top: 20px;
+    padding-top: 30px;
+    padding-bottom: 20px;
     font-size: 70pt;
     font-family: 'Luckiest Guy';
     color: #fff;
