@@ -5,7 +5,13 @@ import "./ImageList.css"
 export default class Gallery extends Component {
   render() {
     return (
+      <div>
+      <div className="h1">
+           MEME GENERATOR
+           </div>
+        
       <div className="image-list">
+        
         {this.props.images.map((image) => {
           return (
             <Image
@@ -15,6 +21,7 @@ export default class Gallery extends Component {
             />
           );
         })}
+      </div>
       </div>
     );
   }
