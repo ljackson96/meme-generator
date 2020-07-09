@@ -8,7 +8,6 @@ export default class Gallery extends Component {
       <div className="image-list">
         {this.props.images.map((image) => {
           return (
-            
             <Image
               key={image.id}
               image={image}
