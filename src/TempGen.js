@@ -188,9 +188,11 @@ class TempGen extends Component {
                             onChange={this.changeText}
                         />
                     </div>
-                    <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
-                    <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
-                    <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
+                    <div className="buttons">
+                        <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                        <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
+                        <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
+                    </div>
                 </div>
             </div >
         );
