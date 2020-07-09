@@ -1,22 +1,22 @@
-
 body {
-    background:#055388;
-    text-align:center;
-  }
+    background: #055388;
+    text-align: center;
+}
 
 .meme-form {
     position: absolute;
     left: 800px;
-    top:80px;
+    top: 80px;
     width: 20%;
 }
 
 .meme-gen-modal {
     max-width: fit-content;
     padding: 90px;
-    box-shadow:4px 0px 0px 0px rgb(73, 137, 198);
+    box-shadow: 4px 0px 0px 0px rgb(73, 137, 198);
     width: 80%;
 }
+
 /* .meme-gen-modal image {
     border: 30px !important;
     border-color: maroon;
@@ -31,14 +31,14 @@ body {
 }
 
 .form-control:focus {
-    border-color:white
-
+    border-color: white
 }
+
 .btn {
     display: flex;
     justify-content: space-evenly;
-
 }
+
 .btn-primary {
     width: 40%;
     padding: 10px 20px;
@@ -60,31 +60,30 @@ body {
     left:0;
     top:0;
 }
+
 .btn-primary:hover {
-    left:4px;
-    top:4px;
-    box-shadow:0 0 0 0 white;
-   
-  }
+    left: 4px;
+    top: 4px;
+    box-shadow: 0 0 0 0 white;
+}
 
 .buttons {
     position: absolute;
     width: 50%;
     left: 800px;
     top: 300px
-    
 }
+
 .meme-gen-modal svg {
     grid-row-end: span 2;
     border: 10px;
     border-bottom: 20px;
     border-style: solid;
-    padding:4px;
-    background-color:#fff;
+    padding: 4px;
+    background-color: #fff;
     border: 1px solid #b2b2b2;
     -webkit-box-shadow: 3px 3px 4px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow:    3px 3px 4px rgba(50, 50, 50, 0.75);
-    box-shadow:         3px 3px 4px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 3px 3px 4px rgba(50, 50, 50, 0.75);
+    box-shadow: 3px 3px 4px rgba(50, 50, 50, 0.75);
     border-radius: 5%;
-   
 }

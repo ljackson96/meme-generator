@@ -46,8 +46,10 @@ class TempGen extends Component {
 
     changeText = (event) => {
         this.setState({
-            [event.currentTarget.name]: event.currentTarget.value,
+            [event.currentTarget.id]: event.currentTarget.value,
         });
+        let type = event.currentTarget.name
+        this.resizeText(type)
     };
 
     handleMouseDown = (e, type) => {
@@ -81,7 +83,7 @@ class TempGen extends Component {
             isBottomDragging: false,
         });
     };
-   
+
     svgToPng = () => {
         svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png");
     };
@@ -97,6 +99,16 @@ class TempGen extends Component {
         });
         document.getElementById("toptext").value = "";
         document.getElementById("bottomtext").value = "";
+        document.getElementById("tiptoptext").style.fontSize = "50px"
+        document.getElementById("bittybottomtext").style.fontSize = "50px"
+    }
+
+    resizeText = (type) => {
+        let currentWidth = document.getElementById(type).textLength.baseVal.value
+        let imageWidth = this.props.meme.width
+        if (currentWidth > imageWidth) {
+            document.getElementById(type).style.fontSize = `${(imageWidth / currentWidth) * 40}px`
+        }
     }
 
     render() {
@@ -111,23 +123,19 @@ class TempGen extends Component {
             textTransform: "uppercase",
             fill: "#FFF",
             stroke: "#000",
-            userSelect: "none",
+            userSelect: "none"
         };
 
         return (
             <div className="main-content">
-              
                 <div className="meme-gen-modal">
                     <svg
                         id="svg_ref"
-                        ref={(el) => {
-                            this.svgRef = el;
-                        }}
+                        ref={(el) => { this.svgRef = el; }}
                         height={newHeight}
                         width={newWidth}
                     >
-                        <image className="hola"
-                    
+                        <image
                             ref={(el) => {
                                 this.imageRef = el;
                             }}
@@ -137,6 +145,7 @@ class TempGen extends Component {
                         />
 
                         <text
+                            id="tiptoptext"
                             style={{ ...textStyle, zIndex: this.state.isTopDragging ? 4 : 1 }}
                             x={this.state.topX}
                             y={this.state.topY}
@@ -149,6 +158,7 @@ class TempGen extends Component {
                         </text>
 
                         <text
+                            id="bittybottomtext"
                             style={textStyle}
                             dominantBaseline="middle"
                             textAnchor="middle"
@@ -164,7 +174,7 @@ class TempGen extends Component {
                         <input
                             className="form-control"
                             type="text"
-                            name="toptext"
+                            name="tiptoptext"
                             id="toptext"
                             placeholder="Add text to the top"
                             onChange={this.changeText}
@@ -172,19 +182,17 @@ class TempGen extends Component {
                         <input
                             className="form-control"
                             type="text"
-                            name="bottomtext"
+                            name="bittybottomtext"
                             id="bottomtext"
                             placeholder="Add text to the bottom"
                             onChange={this.changeText}
                         />
                     </div>
-                    <div className="buttons">
-                        <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
-                        <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
-                        <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
-                    </div>
+                    <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                    <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
+                    <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
                 </div>
-            </div>
+            </div >
         );
     }
 }
