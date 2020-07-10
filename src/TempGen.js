@@ -46,8 +46,10 @@ class TempGen extends Component {
 
     changeText = (event) => {
         this.setState({
-            [event.currentTarget.name]: event.currentTarget.value,
+            [event.currentTarget.id]: event.currentTarget.value,
         });
+        let type = event.currentTarget.name
+        this.resizeText(type)
     };
 
     handleMouseDown = (e, type) => {
@@ -82,33 +84,11 @@ class TempGen extends Component {
         });
     };
 
-    convertSvgToImage = () => {
-        const svg = this.svgRef;
-        let svgData = new XMLSerializer().serializeToString(svg);
-        const canvas = document.createElement("canvas");
-        canvas.setAttribute("id", "canvas");
-        const svgSize = svg.getBoundingClientRect();
-        canvas.width = svgSize.width;
-        canvas.height = svgSize.height;
-        const img = document.createElement("img");
-        img.setAttribute(
-            "src",
-            "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
-        );
-        img.onload = function () {
-            canvas.getContext("2d").drawImage(img, 0, 0);
-            const canvasdata = canvas.toDataURL("image/png");
-            console.log(svgData);
-            const a = document.createElement("a");
-            a.download = "meme.png";
-            a.href = canvasdata;
-            document.body.appendChild(a);
-            a.click();
-        };
-    };
-
-    svgToPng = () => {
-        svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png");
+    saveMeme = () => {
+        let name = document.getElementById("memename").value
+        name.length > 0 ?
+            svg.saveSvgAsPng(document.getElementById("svg_ref"), `${name}.png`) :
+            svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png")
     };
 
     resetBoxes = () => {
@@ -122,6 +102,16 @@ class TempGen extends Component {
         });
         document.getElementById("toptext").value = "";
         document.getElementById("bottomtext").value = "";
+        document.getElementById("tiptoptext").style.fontSize = "50px"
+        document.getElementById("bittybottomtext").style.fontSize = "50px"
+    }
+
+    resizeText = (type) => {
+        let currentWidth = document.getElementById(type).textLength.baseVal.value
+        let imageWidth = this.props.meme.width
+        if (currentWidth > imageWidth) {
+            document.getElementById(type).style.fontSize = `${(imageWidth / currentWidth) * 40}px`
+        }
     }
 
     render() {
@@ -136,75 +126,89 @@ class TempGen extends Component {
             textTransform: "uppercase",
             fill: "#FFF",
             stroke: "#000",
-            userSelect: "none",
+            userSelect: "none"
         };
 
         return (
-            <div className="main-content">
-                <div className="meme-gen-modal">
-                    <svg
-                        id="svg_ref"
-                        ref={(el) => {
-                            this.svgRef = el;
-                        }}
-                        height={newHeight}
-                        width={newWidth}
-                    >
-                        <image
-                            ref={(el) => {
-                                this.imageRef = el;
-                            }}
-                            xlinkHref={this.props.meme.url}
+            <div>
+                <div className="h1">
+                    MEME GENERATOR
+                </div>
+                <div className="main-content">
+                    <div className="meme-gen-modal">
+                        <svg
+                            id="svg_ref"
+                            ref={(el) => { this.svgRef = el; }}
                             height={newHeight}
                             width={newWidth}
-                        />
-
-                        <text
-                            style={{ ...textStyle, zIndex: this.state.isTopDragging ? 4 : 1 }}
-                            x={this.state.topX}
-                            y={this.state.topY}
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            onMouseDown={(event) => this.handleMouseDown(event, "top")}
-                            onMouseUp={(event) => this.handleMouseUp(event, "top")}
                         >
-                            {this.state.toptext}
-                        </text>
+                            <image
+                                ref={(el) => {
+                                    this.imageRef = el;
+                                }}
+                                xlinkHref={this.props.meme.url}
+                                height={newHeight}
+                                width={newWidth}
+                            />
 
-                        <text
-                            style={textStyle}
-                            dominantBaseline="middle"
-                            textAnchor="middle"
-                            x={this.state.bottomX}
-                            y={this.state.bottomY}
-                            onMouseDown={(event) => this.handleMouseDown(event, "bottom")}
-                            onMouseUp={(event) => this.handleMouseUp(event, "bottom")}
-                        >
-                            {this.state.bottomtext}
-                        </text>
-                    </svg>
-                    <div className="meme-form">
-                        <input
-                            className="form-control"
-                            type="text"
-                            name="toptext"
-                            id="toptext"
-                            placeholder="Add text to the top"
-                            onChange={this.changeText}
-                        />
-                        <input
-                            className="form-control"
-                            type="text"
-                            name="bottomtext"
-                            id="bottomtext"
-                            placeholder="Add text to the bottom"
-                            onChange={this.changeText}
-                        />
+                            <text
+                                id="tiptoptext"
+                                style={{ ...textStyle, zIndex: this.state.isTopDragging ? 4 : 1 }}
+                                x={this.state.topX}
+                                y={this.state.topY}
+                                dominantBaseline="middle"
+                                textAnchor="middle"
+                                onMouseDown={(event) => this.handleMouseDown(event, "top")}
+                                onMouseUp={(event) => this.handleMouseUp(event, "top")}
+                            >
+                                {this.state.toptext}
+                            </text>
+
+                            <text
+                                id="bittybottomtext"
+                                style={textStyle}
+                                dominantBaseline="middle"
+                                textAnchor="middle"
+                                x={this.state.bottomX}
+                                y={this.state.bottomY}
+                                onMouseDown={(event) => this.handleMouseDown(event, "bottom")}
+                                onMouseUp={(event) => this.handleMouseUp(event, "bottom")}
+                            >
+                                {this.state.bottomtext}
+                            </text>
+                        </svg>
+                        <div className="meme-form">
+                            <input
+                                className="form-control"
+                                type="text"
+                                name="tiptoptext"
+                                id="toptext"
+                                placeholder="Add text to the top"
+                                onChange={this.changeText}
+                            />
+
+                            <input
+                                className="form-control"
+                                type="text"
+                                name="bittybottomtext"
+                                id="bottomtext"
+                                placeholder="Add text to the bottom"
+                                onChange={this.changeText}
+                            />
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="memename"
+                                placeholder="Save meme as..."
+                            />
+                        </div>
+                        <div className="buttons">
+                            <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
+                            <button onClick={this.saveMeme} className="btn btn-primary">Download Meme :D</button>
+                            <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
+                        </div>
                     </div>
-                    <button onClick={this.svgToPng} className="btn btn-primary">Download Meme :D</button>
-                    <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
-                    <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
-                </div>
+                </div >
             </div>
         );
     }
