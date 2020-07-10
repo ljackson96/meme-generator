@@ -11,11 +11,7 @@
     width: 250px;
     grid-row-end: span 2;
     border: 1px;
-    border-color: maroon;
-    border-style: double;
-    border-radius: 5%;
-    padding: 4px;
-    background-color: white;
+    border-radius: 5%; 
     padding:4px;
     background-color:#fff;
     border: 1px solid #b2b2b2;
@@ -24,19 +20,6 @@
     box-shadow:         3px 3px 4px rgba(50, 50, 50, 0.75);
     
 }
-
-/* .title {
-    position: relative;
-    height: 30vh;
-    padding-top: 10px;
-    font-size:6em;
-    color:rgb(255, 255, 255);
-    box-shadow:4px 4px 0px 0px rgb(80, 128, 174);
-    font-family: 'Open Sans', sans-serif;
-    font-weight:700;
-    letter-spacing:5px;
-} */
-
 
 .h1 {
     padding-top: 30px;

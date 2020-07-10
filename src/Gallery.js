@@ -10,8 +10,8 @@ export default class Gallery extends Component {
           MEME GENERATOR
         </div>
 
-        <div className="another fucking button" >
-          <button onClick={() => this.props.handleRandom()}>Random Meme</button>
+        <div  >
+          <button className="btn-gallery" onClick={() => this.props.handleRandom()}>Random Meme</button>
         </div>
 
         <div className="image-list">
