@@ -104,6 +104,7 @@ class TempGen extends Component {
         document.getElementById("bottomtext").value = "";
         document.getElementById("tiptoptext").style.fontSize = "50px"
         document.getElementById("bittybottomtext").style.fontSize = "50px"
+        document.getElementById("memename").value= "";
     }
 
     resizeText = (type) => {

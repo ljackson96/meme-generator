@@ -18,7 +18,7 @@ export default class App extends Component {
 
   chooseRandom = () => {
     this.setState({ selected: true, selectedImg: this.state.images[Math.floor(Math.random() * this.state.images.length)] })
-  }
+  };
 
   toggleComponent = () => {
     if (this.state.selected) {
@@ -38,11 +38,11 @@ export default class App extends Component {
     return <div>
       {this.toggleComponent()}
     </div>;
-  }
+  };
 
   toggleSelected = () => {
     this.setState({ selected: !this.state.selected })
-  }
+  };
 
   componentDidMount() {
     fetch("https://api.imgflip.com/get_memes")
@@ -50,5 +50,5 @@ export default class App extends Component {
       .then((images) => {
         this.setState({ images: images.data.memes });
       });
-  }
+  };
 }
