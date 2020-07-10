@@ -7,10 +7,11 @@ export default class Image extends React.Component {
     }
     this.imageRef = React.createRef();
   }
+
   componentDidMount() {
     this.imageRef.current.addEventListener('load', this.setSpans)
-
   }
+
   setSpans = () => {
     const height = this.imageRef.current.clientHeight;
     const spans = Math.ceil(height / 10 + 2)
