@@ -27,7 +27,7 @@ export default class App extends Component {
       return (
         <Gallery
           handleRandom={this.chooseRandom}
-          images={this.state.images.filter((i) => i.box_count === 2)}
+          images={this.state.images}
           handleclick={this.handleImgClick}
         />
       );
@@ -48,7 +48,7 @@ export default class App extends Component {
     fetch("https://api.imgflip.com/get_memes")
       .then((r) => r.json())
       .then((images) => {
-        this.setState({ images: images.data.memes });
+        this.setState({ images: images.data.memes.filter((i) => i.box_count === 2) });
       });
   }
 }
