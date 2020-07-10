@@ -11,7 +11,6 @@ const initialState = {
     topY: "10%",
     bottomX: "50%",
     bottomY: "90%",
-    // memename: ""
 };
 
 class TempGen extends Component {
@@ -200,7 +199,7 @@ class TempGen extends Component {
                                 className="form-control"
                                 type="text"
                                 id="memename"
-                                placeholder="Change meme name for downloading"
+                                placeholder="Save meme as..."
                             />
                         </div>
                         <div className="buttons">

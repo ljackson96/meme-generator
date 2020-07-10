@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Gallery from "./Gallery";
-// import Generator from "./Generator";
 import TempGen from "./TempGen";
 
 export default class App extends Component {
@@ -8,7 +7,6 @@ export default class App extends Component {
     images: [],
     selected: null,
     selectedImg: [],
-    // savedMemes: []
   };
 
   handleImgClick = (e) => {
@@ -19,8 +17,7 @@ export default class App extends Component {
   };
 
   chooseRandom = () => {
-    this.setState({selected: true, selectedImg: this.state.images[Math.floor(Math.random()*this.state.images.length)]})
-    console.log(this.state.selectedImg)
+    this.setState({ selected: true, selectedImg: this.state.images[Math.floor(Math.random() * this.state.images.length)] })
   }
 
   toggleComponent = () => {
