@@ -6,22 +6,25 @@ export default class Gallery extends Component {
   render() {
     return (
       <div>
-      <div className="h1">
-           MEME GENERATOR
-           </div>
-        
-      <div className="image-list">
-        
-        {this.props.images.map((image) => {
-          return (
-            <Image
-              key={image.id}
-              image={image}
-              handleclick={this.props.handleclick}
-            />
-          );
-        })}
-      </div>
+        <div className="h1">
+          MEME GENERATOR
+        </div>
+
+        <div className="another fucking button" >
+          <button onClick={() => this.props.handleRandom()}>Random Meme</button>
+        </div>
+
+        <div className="image-list">
+          {this.props.images.map((image) => {
+            return (
+              <Image
+                key={image.id}
+                image={image}
+                handleclick={this.props.handleclick}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

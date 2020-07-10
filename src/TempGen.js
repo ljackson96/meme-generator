@@ -11,6 +11,7 @@ const initialState = {
     topY: "10%",
     bottomX: "50%",
     bottomY: "90%",
+    memename: ""
 };
 
 class TempGen extends Component {
@@ -85,8 +86,17 @@ class TempGen extends Component {
     };
 
     svgToPng = () => {
-        svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png");
+        let name = document.getElementById("memename").value
+        if (name.length > 0) {
+            this.setState({ memename: `${name}.png` })
+        } else { this.setState({ memename: "meme.png" }) };
+        this.saveMeme()
+        console.log(this.state.memename)
     };
+
+    saveMeme = () => {
+        svg.saveSvgAsPng(document.getElementById("svg_ref"), this.state.memename);
+    }
 
     resetBoxes = () => {
         this.setState({
@@ -179,6 +189,7 @@ class TempGen extends Component {
                             placeholder="Add text to the top"
                             onChange={this.changeText}
                         />
+
                         <input
                             className="form-control"
                             type="text"
@@ -186,6 +197,12 @@ class TempGen extends Component {
                             id="bottomtext"
                             placeholder="Add text to the bottom"
                             onChange={this.changeText}
+                        />
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="memename"
+                            placeholder="Change meme name for downloading"
                         />
                     </div>
                     <div className="buttons">
