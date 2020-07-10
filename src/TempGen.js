@@ -102,6 +102,7 @@ class TempGen extends Component {
         });
         document.getElementById("toptext").value = "";
         document.getElementById("bottomtext").value = "";
+        document.getElementById("memename").value = "";
         document.getElementById("tiptoptext").style.fontSize = "50px"
         document.getElementById("bittybottomtext").style.fontSize = "50px"
     }
@@ -110,7 +111,7 @@ class TempGen extends Component {
         let currentWidth = document.getElementById(type).textLength.baseVal.value
         let imageWidth = this.props.meme.width
         if (currentWidth > imageWidth) {
-            document.getElementById(type).style.fontSize = `${(imageWidth / currentWidth) * 40}px`
+            document.getElementById(type).style.fontSize = `${(imageWidth / currentWidth) * 40}px`;
         }
     }
 
@@ -131,7 +132,7 @@ class TempGen extends Component {
 
         return (
             <div>
-                <div className="h1">
+                <div className="h1" onClick={() => this.props.toggleSelected()}>
                     MEME GENERATOR
                 </div>
                 <div className="main-content">
@@ -203,9 +204,9 @@ class TempGen extends Component {
                             />
                         </div>
                         <div className="buttons">
-                            <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
                             <button onClick={this.saveMeme} className="btn btn-primary">Download Meme :D</button>
                             <button onClick={this.resetBoxes} className="btn btn-primary">Reset</button>
+                            <button onClick={() => this.props.toggleSelected()} className="btn btn-primary">Back to Gallery</button>
                         </div>
                     </div>
                 </div >
