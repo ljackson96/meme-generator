@@ -44,13 +44,6 @@ class TempGen extends Component {
         return stateObj;
     };
 
-    changeText = (event) => {
-        this.setState({
-            [event.currentTarget.id]: event.currentTarget.value,
-        });
-        let type = event.currentTarget.name
-        this.resizeText(type)
-    };
 
     handleMouseDown = (e, type) => {
         const stateObj = this.getStateObj(e, type);
@@ -107,12 +100,17 @@ class TempGen extends Component {
         document.getElementById("bittybottomtext").style.fontSize = "50px"
     }
 
-    resizeText = (type) => {
-        let currentWidth = document.getElementById(type).textLength.baseVal.value
-        let imageWidth = this.props.meme.width
-        if (currentWidth > imageWidth) {
-            document.getElementById(type).style.fontSize = `${(imageWidth / currentWidth) * 40}px`;
-        }
+    changeText = (event) => {
+        this.setState({
+            [event.currentTarget.id]: event.currentTarget.value,
+        });
+    };
+
+    resizeText = (type, direction) => {
+        let currentSize = parseInt(document.getElementById(type).style.fontSize)
+        if (direction === "increase") {
+            return document.getElementById(type).style.fontSize = `${currentSize + 5}px`
+        } else { return document.getElementById(type).style.fontSize = `${currentSize - 5}px` }
     }
 
     render() {
@@ -179,23 +177,31 @@ class TempGen extends Component {
                             </text>
                         </svg>
                         <div className="meme-form">
-                            <input
-                                className="form-control"
-                                type="text"
-                                name="tiptoptext"
-                                id="toptext"
-                                placeholder="Add text to the top"
-                                onChange={this.changeText}
-                            />
+                            <div className="top-text">
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    name="tiptoptext"
+                                    id="toptext"
+                                    placeholder="Add text to the top"
+                                    onChange={this.changeText}
+                                />
+                                <button onClick={() => this.resizeText("tiptoptext", "increase")}>+</button>
+                                <button onClick={() => this.resizeText("tiptoptext", "decrease")}>-</button>
 
-                            <input
-                                className="form-control"
-                                type="text"
-                                name="bittybottomtext"
-                                id="bottomtext"
-                                placeholder="Add text to the bottom"
-                                onChange={this.changeText}
-                            />
+                            </div>
+                            <div className="bottom-text">
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    name="bittybottomtext"
+                                    id="bottomtext"
+                                    placeholder="Add text to the bottom"
+                                    onChange={this.changeText}
+                                />
+                                <button onClick={() => this.resizeText("bittybottomtext", "increase")}>+</button>
+                                <button onClick={() => this.resizeText("bittybottomtext", "decrease")}>-</button>
+                            </div>
                             <input
                                 className="form-control"
                                 type="text"

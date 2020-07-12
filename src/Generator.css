@@ -104,3 +104,7 @@ body {
     top: 4px;
     box-shadow: 0 0 0 0 white;
 }
+
+.top-text {
+    display: inline-block
+}
