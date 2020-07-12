@@ -186,10 +186,10 @@ class TempGen extends Component {
                                     placeholder="Add text to the top"
                                     onChange={this.changeText}
                                 />
-                                <button onClick={() => this.resizeText("tiptoptext", "increase")}>+</button>
-                                <button onClick={() => this.resizeText("tiptoptext", "decrease")}>-</button>
-
+                                <button className="btn-gallery" onClick={() => this.resizeText("tiptoptext", "increase")}>+</button>
+                                <button className="btn-gallery" onClick={() => this.resizeText("tiptoptext", "decrease")}>-</button>
                             </div>
+
                             <div className="bottom-text">
                                 <input
                                     className="form-control"
@@ -199,9 +199,10 @@ class TempGen extends Component {
                                     placeholder="Add text to the bottom"
                                     onChange={this.changeText}
                                 />
-                                <button onClick={() => this.resizeText("bittybottomtext", "increase")}>+</button>
-                                <button onClick={() => this.resizeText("bittybottomtext", "decrease")}>-</button>
+                                <button className="btn-gallery" onClick={() => this.resizeText("bittybottomtext", "increase")}>+</button>
+                                <button className="btn-gallery" onClick={() => this.resizeText("bittybottomtext", "decrease")}>-</button>
                             </div>
+                            
                             <input
                                 className="form-control"
                                 type="text"
