@@ -11,7 +11,7 @@
     "react-dom": "^16.13.1",
     "react-dynamic-font": "^2.0.1",
     "react-scale-text": "^1.2.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.5.1",
     "save-svg-as-png": "^1.4.17"
   },
